@@ -13,6 +13,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Bill extends BaseEntity {
+
     @Column(columnDefinition = "char(11)")
     private String ruc;
     @Column(columnDefinition = "float")
@@ -20,7 +21,7 @@ public class Bill extends BaseEntity {
     @Column(columnDefinition = "datetime")
     private double date;
 
-    // * aqui va la ra relacion de 1-1 con reserva
+    // aqui va la relacion de 1-1 con reserva
     @OneToOne
     @JoinColumn(name = "fk_reservation")
     private Reservation reservation;

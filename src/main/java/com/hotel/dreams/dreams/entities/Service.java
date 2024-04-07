@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Service extends BaseEntity{
     @Column(length = 500)
-    private String icon;
+    private String icon; //sera el icono del servicio, ejemplo una pesa
     @Column(length = 30)
     private String name;
 }

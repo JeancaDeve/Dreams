@@ -16,5 +16,5 @@ public class BaseEntity {
     @Id
     @Column(length = 200, nullable =  false)
     private String code; //? ejemplo code (USER13242)
-
 }
+ 
