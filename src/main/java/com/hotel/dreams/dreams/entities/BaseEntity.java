@@ -1,6 +1,8 @@
 package com.hotel.dreams.dreams.entities;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
 import lombok.AllArgsConstructor;
@@ -14,7 +16,7 @@ import lombok.NoArgsConstructor;
 //* Esta es una clase base que tendra los atributos que tienen en comun todas las entidades
 public class BaseEntity {
     @Id
-    @Column(length = 200, nullable =  false)
-    private String code; //? ejemplo code (USER13242)
+    @GeneratedValue(strategy =  GenerationType.IDENTITY) //generacion automatica de id
+    private int code; 
 }
  
