@@ -20,6 +20,9 @@ public class Reservation extends BaseEntity {
     @Column(name = "date_exit", columnDefinition = "datetime")
     private String dateExit;
 
+    @Column(columnDefinition = "char(1)")
+    private String status = "1";
+
     //Muchas reservas pueden pertenecer a un usuario, relacion de m-1
     @ManyToOne
     @JoinColumn(name = "fk_user")
@@ -30,4 +33,5 @@ public class Reservation extends BaseEntity {
     @OneToOne
     @JoinColumn(name = "fk_room")
     private Room room;
+
 }
