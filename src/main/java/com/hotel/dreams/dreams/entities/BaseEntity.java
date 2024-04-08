@@ -18,4 +18,3 @@ public class BaseEntity {
     @GeneratedValue(strategy =  GenerationType.IDENTITY) //generacion automatica de id
     private int code; 
 }
- 
