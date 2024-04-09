@@ -12,18 +12,18 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Bill extends BaseEntity {
+public class Factura extends EntidadBase {
 
     @Column(columnDefinition = "char(11)")
     private String ruc;
     @Column(columnDefinition = "float")
-    private double amount;
+    private double monto;
     @Column(columnDefinition = "datetime")
-    private double date;
+    private double fecha;
 
     // aqui va la relacion de 1-1 con reserva
     @OneToOne
-    @JoinColumn(name = "fk_reservation")
-    private Reservation reservation;
+    @JoinColumn(name = "fk_reserva")
+    private Reserva reserva;
 
 }

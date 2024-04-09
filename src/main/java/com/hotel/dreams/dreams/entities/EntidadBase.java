@@ -12,9 +12,10 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-//* Esta es una clase base que tendra los atributos que tienen en comun todas las entidades
-public class BaseEntity {
+// * Esta es una clase base que tendra los atributos que tienen en comun todas
+// las entidades
+public class EntidadBase {
     @Id
-    @GeneratedValue(strategy =  GenerationType.IDENTITY) //generacion automatica de id
-    private int code; 
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // generacion automatica de id
+    private int codigo;
 }

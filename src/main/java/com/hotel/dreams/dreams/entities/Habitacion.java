@@ -10,17 +10,16 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Room extends BaseEntity {
+public class Habitacion extends EntidadBase {
     @Column(columnDefinition = "tinyint")
-    private int number; //numero de habitacion
+    private int numero; // numero de habitacion
 
     @Column(length = 500)
-    private String description; //especificamos que con que cuenta la habitacion
+    private String descripcion; // especificamos que con que cuenta la habitacion
 
     @Column(columnDefinition = "char(1)")
-    private String status = "1"; //1 = disponible, 0 = ocupado
+    private String estado = "1"; // 1 = disponible, 0 = ocupado
     @Column(length = 500)
-    private String image;
-   
+    private String imagen;
 
 }
