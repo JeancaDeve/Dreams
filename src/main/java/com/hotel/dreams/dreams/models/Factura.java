@@ -17,15 +17,10 @@ import lombok.NoArgsConstructor;
 public class Factura extends EntidadBase {
 
     @Column(columnDefinition = "char(11)")
-    private String ruc;
+    private String ruc; //un ruc por defecto son de 11 digitos (65432156785)
     @Column(columnDefinition = "float")
     private double monto;
     @Column(columnDefinition = "datetime")
     private double fecha;
-
-    // aqui va la relacion de 1-1 con reserva
-    @OneToOne
-    @JoinColumn(name = "fk_reserva")
-    private Reserva reserva;
 
 }

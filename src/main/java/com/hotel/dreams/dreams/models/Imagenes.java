@@ -9,12 +9,13 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "imagenes_hotel")
+@Table(name = "imagenes")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-public class ImagenesHotel extends EntidadBase {
+//imagenes que se mostraran par mejorar el ui/ux
+public class Imagenes extends EntidadBase {
     @Column(length = 500)
     private String imagen;
     @Column(length = 500)

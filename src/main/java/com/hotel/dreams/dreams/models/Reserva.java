@@ -2,8 +2,6 @@ package com.hotel.dreams.dreams.models;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -27,16 +25,5 @@ public class Reserva extends EntidadBase {
 
     @Column(columnDefinition = "datetime", name = "fecha_reserva")
     private String fechaReserva;
-
-    // Muchas reservas pueden pertenecer a un usuario, relacion de m-1
-    @ManyToOne
-    @JoinColumn(name = "fk_usuario")
-    private Usuario usuario;
-
-    // Una reserva esta asociada a una habitacion
-
-    @OneToOne
-    @JoinColumn(name = "fk_habitacion")
-    private Habitacion habitacion;
 
 }
