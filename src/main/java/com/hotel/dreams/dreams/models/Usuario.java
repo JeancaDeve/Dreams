@@ -1,4 +1,4 @@
-package com.hotel.dreams.dreams.entities;
+package com.hotel.dreams.dreams.models;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

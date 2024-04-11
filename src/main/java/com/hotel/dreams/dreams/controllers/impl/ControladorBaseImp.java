@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import com.hotel.dreams.dreams.controllers.ControladorBase;
-import com.hotel.dreams.dreams.entities.EntidadBase;
+import com.hotel.dreams.dreams.models.EntidadBase;
 import com.hotel.dreams.dreams.services.impl.ServicioBaseImpl;
 
 import java.util.List;

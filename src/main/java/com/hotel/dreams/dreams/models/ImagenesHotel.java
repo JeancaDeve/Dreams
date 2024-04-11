@@ -1,20 +1,22 @@
-package com.hotel.dreams.dreams.entities;
+package com.hotel.dreams.dreams.models;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Entity
+@Table(name = "imagenes_hotel")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-public class Servicio extends EntidadBase {
+public class ImagenesHotel extends EntidadBase {
     @Column(length = 500)
-    private String icono; // sera el icono del servicio, ejemplo una pesa
-    @Column(length = 30)
-    private String nombre;
+    private String imagen;
+    @Column(length = 500)
+    private String descripcion;
 }

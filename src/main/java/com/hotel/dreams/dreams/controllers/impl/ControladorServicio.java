@@ -4,7 +4,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.hotel.dreams.dreams.entities.Servicio;
+import com.hotel.dreams.dreams.models.Servicio;
 import com.hotel.dreams.dreams.services.impl.ServicioImplServicio;
 
 @RestController

@@ -2,7 +2,7 @@ package com.hotel.dreams.dreams.repositories;
 
 import org.springframework.stereotype.Repository;
 
-import com.hotel.dreams.dreams.entities.ImagenesHotel;
+import com.hotel.dreams.dreams.models.ImagenesHotel;
 
 @Repository
 public interface RepositorioImagesHotel extends RepositorioBase<ImagenesHotel, Integer> {

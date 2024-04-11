@@ -3,7 +3,7 @@ package com.hotel.dreams.dreams.services.impl;
 import java.util.List;
 import java.util.Optional;
 
-import com.hotel.dreams.dreams.entities.EntidadBase;
+import com.hotel.dreams.dreams.models.EntidadBase;
 import com.hotel.dreams.dreams.repositories.RepositorioBase;
 import com.hotel.dreams.dreams.services.ServicioBase;
 

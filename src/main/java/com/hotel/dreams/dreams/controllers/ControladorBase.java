@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 
-import com.hotel.dreams.dreams.entities.EntidadBase;
+import com.hotel.dreams.dreams.models.EntidadBase;
 
 public interface ControladorBase<E extends EntidadBase, ID> {
     public ResponseEntity<List<?>> getAll() throws Exception;

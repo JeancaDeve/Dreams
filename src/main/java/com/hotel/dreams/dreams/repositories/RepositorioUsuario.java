@@ -2,7 +2,7 @@ package com.hotel.dreams.dreams.repositories;
 
 import org.springframework.stereotype.Repository;
 
-import com.hotel.dreams.dreams.entities.Usuario;
+import com.hotel.dreams.dreams.models.Usuario;
 
 @Repository
 public interface RepositorioUsuario extends RepositorioBase<Usuario, Integer>{

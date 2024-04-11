@@ -1,8 +1,8 @@
 package com.hotel.dreams.dreams.services;
 
-import com.hotel.dreams.dreams.entities.EntidadBase;
-
 import java.util.List;
+
+import com.hotel.dreams.dreams.models.EntidadBase;
 
 public interface ServicioBase<E extends EntidadBase, ID> {
     // * estos son los servicios generales que tendran cada clase (entidad)

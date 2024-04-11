@@ -3,7 +3,7 @@ package com.hotel.dreams.dreams.services.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.hotel.dreams.dreams.entities.Servicio;
+import com.hotel.dreams.dreams.models.Servicio;
 import com.hotel.dreams.dreams.repositories.RepositorioBase;
 import com.hotel.dreams.dreams.repositories.RepositorioServicio;
 import com.hotel.dreams.dreams.services.ServicioServicio;
