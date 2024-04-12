@@ -21,7 +21,7 @@ public class Habitacion extends EntidadBase {
 
     @Column(columnDefinition = "char(1)")
     private String estado = "1"; // 1 = disponible, 0 = ocupado
-    
+
     @Column(length = 500)
     private String imagen;
 
