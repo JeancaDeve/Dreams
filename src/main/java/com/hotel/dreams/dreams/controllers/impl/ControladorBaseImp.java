@@ -54,7 +54,7 @@ public class ControladorBaseImp<E extends EntidadBase, S extends ServicioBaseImp
             servicio.save(entity);
             return ResponseEntity.status(HttpStatus.CREATED).body(entity);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("This is the error:" + e);
         }
     }
 

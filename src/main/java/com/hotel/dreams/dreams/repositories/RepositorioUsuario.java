@@ -2,9 +2,9 @@ package com.hotel.dreams.dreams.repositories;
 
 import org.springframework.stereotype.Repository;
 
-import com.hotel.dreams.dreams.models.Huesped;
+import com.hotel.dreams.dreams.models.Usuario;
 
 @Repository
-public interface RepositorioUsuario extends RepositorioBase<Huesped, Integer>{
-    //todo: se pueden agregar mas metodos personalizados para la clase
+public interface RepositorioUsuario extends RepositorioBase<Usuario, Integer> {
+    // todo: se pueden agregar mas metodos personalizados para la clase
 }

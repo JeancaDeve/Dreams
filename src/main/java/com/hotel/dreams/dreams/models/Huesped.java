@@ -1,5 +1,6 @@
 package com.hotel.dreams.dreams.models;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
@@ -8,6 +9,14 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import java.util.List;
+
+/**
+ * Esta es la entidad de Huesped
+ * 
+ * *Tiene una relacion con reserva de uno a muchos @oneToMany
+ * 
+ * 
+ */
 
 @Entity
 @Data
@@ -32,5 +41,8 @@ public class Huesped extends EntidadBase {
 
     @Column(columnDefinition = "datetime", name = "fecha_nacimiento")
     private String fechaNacimiento;
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Reserva> reservas;
 
 }
