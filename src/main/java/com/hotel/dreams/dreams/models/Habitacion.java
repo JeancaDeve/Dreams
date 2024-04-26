@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class Habitacion extends EntidadBase {
-    @Column(columnDefinition = "tinyint")
+    @Column(columnDefinition = "smallint")
     private int numero; // numero de habitacion
 
     @Column(length = 500)
@@ -24,5 +24,8 @@ public class Habitacion extends EntidadBase {
 
     @Column(length = 500)
     private String imagen;
+
+    @Column(columnDefinition = "float", name = "precio_dia")
+    private double precioDia;
 
 }
