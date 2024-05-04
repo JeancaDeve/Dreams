@@ -6,5 +6,5 @@ import com.hotel.dreams.dreams.models.Huesped;
 
 @Repository
 public interface RepositorioHuesped extends RepositorioBase<Huesped, Integer> {
-    //public void cambiarEstadoHabitacion(boolean isReservado, Integer idHabitacion);
+
 }
