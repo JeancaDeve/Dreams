@@ -3,6 +3,7 @@ package com.hotel.dreams.dreams.controllers.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,6 +17,7 @@ import com.hotel.dreams.dreams.services.impl.ServicioBaseImpl;
 
 import java.util.List;
 
+@PreAuthorize("isAuthenticated()")
 public class ControladorBaseImp<E extends EntidadBase, S extends ServicioBaseImpl<E, Integer>>
         implements ControladorBase<E, Integer> {
 

@@ -3,6 +3,7 @@ package com.hotel.dreams.dreams.models;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -20,13 +21,14 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
+@Builder
 public class Usuario extends EntidadBase {
   @Column(length = 250, nullable = false)
   private String nombreCompleto;
 
-  @Column(nullable = false, length = 9, columnDefinition = "char(9)", name = "numero_celular")
+  @Column(nullable = false, length = 9, columnDefinition = "char(9)", name = "numero_celular", unique = true)
   private String numeroCelular; // un numero celular maximo es de 9 digitos
 
-  @Column(length = 255)
+  @Column(length = 500)
   private String clave;
 }

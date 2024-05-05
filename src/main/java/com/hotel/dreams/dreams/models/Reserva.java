@@ -6,6 +6,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -31,6 +32,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
+@Builder
 public class Reserva extends EntidadBase {
     @Column(name = "fecha_entrada", columnDefinition = "datetime")
     private String fechaEntrada;
@@ -39,7 +41,7 @@ public class Reserva extends EntidadBase {
     private String fechaSalida;
 
     @Column(columnDefinition = "char(1)")
-    private String estado = "1"; // 1 = en ejecucion, 0 = cancelado
+    private String estado; // 1 = en ejecucion, 0 = cancelado
 
     @Column(columnDefinition = "datetime", name = "fecha_reserva")
     private String fechaReserva;
