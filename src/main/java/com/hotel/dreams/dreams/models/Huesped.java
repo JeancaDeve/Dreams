@@ -35,10 +35,10 @@ public class Huesped extends EntidadBase {
     @Column(length = 100, nullable = false)
     private String apellidos;
 
-    @Column(nullable = false, length = 9, columnDefinition = "char(9)", name = "numero_celular")
+    @Column(nullable = false, length = 9, columnDefinition = "char(9)", name = "numero_celular", unique = true)
     private String numeroCelular; // un numero celular maximo es de 9 digitos
 
-    @Column(columnDefinition = "char(8)")
+    @Column(columnDefinition = "char(8)", unique = true)
     private String dni; // un dni tiene 8 digitos (77493128)
 
     @Column(columnDefinition = "datetime", name = "fecha_nacimiento")
