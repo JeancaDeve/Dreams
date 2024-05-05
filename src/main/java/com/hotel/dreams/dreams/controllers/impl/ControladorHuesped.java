@@ -17,7 +17,6 @@ import com.hotel.dreams.dreams.services.impl.ServicioImplHuesped;
 @RestController
 @RequestMapping("api/v1/dreams/huesped")
 @CrossOrigin(origins = "*")
-@PreAuthorize("isAuthenticated()")
 public class ControladorHuesped extends ControladorBaseImp<Huesped, ServicioImplHuesped> {
     @Autowired
     protected ServicioImplHuesped servicioHuesped;
@@ -27,7 +26,7 @@ public class ControladorHuesped extends ControladorBaseImp<Huesped, ServicioImpl
         try {
             return ResponseEntity.status(HttpStatus.OK).body(servicioHuesped.hacerReserva(huesped, idHabitacion));
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Error : " + e.getMessage());
         }
     }
 
