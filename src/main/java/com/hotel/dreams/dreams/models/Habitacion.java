@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(callSuper = true)
 @Builder
 public class Habitacion extends EntidadBase {
-    @Column(columnDefinition = "smallint")
+    @Column(columnDefinition = "smallint" , unique = true)
     private int numero; // numero de habitacion
 
     @Column(length = 1000)
