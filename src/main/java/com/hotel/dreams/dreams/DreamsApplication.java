@@ -34,7 +34,7 @@ public class DreamsApplication {
 			Habitacion habitacionOne = Habitacion.builder()
 					.descripcion(
 							"Adipisicing sint ea anim labore est in ad labore. Aliqua ea sit cupidatat amet. Culpa id quis nostrud cillum ipsum duis et deserunt dolor et. Consectetur reprehenderit ullamco adipisicing sint cillum anim pariatur elit dolor non id ut cillum minim. Voluptate occaecat culpa quis anim officia est voluptate elit. Esse irure irure Lorem ex aliqua culpa consectetur officia pariatur. Nulla duis in ipsum sint nisi ex ut pariatur velit consequat velit. Nulla proident id id qui. Pariatur nostrud nisi fugiat dolor reprehenderit deserunt incididunt Lorem elit. Ut irure fugiat et cupidatat sit. Veniam aliqua ut occaecat cupidatat consectetur eiusmod ea eu.")
-					.precioDia(200.40)
+					.precioDia(200.50)
 					.numero(400)
 					.estado("1")
 					.imagen("https://inspira.oechsle.pe/wp-content/uploads/2023/05/habitaciones-modernas.jpg")
@@ -43,8 +43,8 @@ public class DreamsApplication {
 					.descripcion(
 							"Adipisicing sint ea anim labore est in ad labore. Aliqua ea sit cupidatat amet. Culpa id quis nostrud cillum ipsum duis et deserunt dolor et. Consectetur reprehenderit ullamco adipisicing sint cillum anim pariatur elit dolor non id ut cillum minim. Voluptate occaecat culpa quis anim officia est voluptate elit. Esse irure irure Lorem ex aliqua culpa consectetur officia pariatur. Nulla duis in ipsum sint nisi ex ut pariatur velit consequat velit. Nulla proident id id qui. Pariatur nostrud nisi fugiat dolor reprehenderit deserunt incididunt Lorem elit. Ut irure fugiat et cupidatat sit. Veniam aliqua ut occaecat cupidatat consectetur eiusmod ea eu.")
 					.precioDia(200.40)
-					.numero(400)
-					.estado("0")
+					.numero(401)
+					.estado("1")
 					.imagen("https://inspira.oechsle.pe/wp-content/uploads/2023/05/habitaciones-modernas.jpg")
 					.build();
 
