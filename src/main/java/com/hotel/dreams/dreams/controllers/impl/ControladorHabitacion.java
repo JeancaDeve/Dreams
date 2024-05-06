@@ -23,7 +23,6 @@ public class ControladorHabitacion extends ControladorBaseImp<Habitacion, Servic
   ServicioImplHabitacion _servicioImplHabitacion;
 
   @GetMapping("/disponibles")
-  @PreAuthorize("isAuthenticated()")
   public ResponseEntity<List<Habitacion>> findHabitacionesDisponibles() {
     try {
       return ResponseEntity.status(HttpStatus.OK).body(_servicioImplHabitacion.getHabitacionesDisponibles());
