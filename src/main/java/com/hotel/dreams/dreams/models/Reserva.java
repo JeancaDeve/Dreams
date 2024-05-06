@@ -49,7 +49,7 @@ public class Reserva extends EntidadBase {
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     private Factura factura;
 
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne
     private Habitacion habitacion;
 
 }
