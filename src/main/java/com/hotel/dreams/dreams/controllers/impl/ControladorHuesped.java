@@ -26,7 +26,7 @@ public class ControladorHuesped extends ControladorBaseImp<Huesped, ServicioImpl
         try {
             return ResponseEntity.status(HttpStatus.OK).body(servicioHuesped.hacerReserva(huesped, idHabitacion));
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Error : " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
 
