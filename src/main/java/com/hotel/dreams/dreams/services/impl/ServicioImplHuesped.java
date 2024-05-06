@@ -11,17 +11,12 @@ import com.hotel.dreams.dreams.repositories.RepositorioBase;
 import com.hotel.dreams.dreams.repositories.RepositorioHabitacion;
 import com.hotel.dreams.dreams.repositories.RepositorioHuesped;
 import com.hotel.dreams.dreams.services.ServicioHuesped;
+import java.util.Optional;
 
 import jakarta.transaction.Transactional;
 
 @Service
 public class ServicioImplHuesped extends ServicioBaseImpl<Huesped, Integer> implements ServicioHuesped {
-
-    /*
-     * @Autowired
-     * protected RepositorioHuesped _RepositorioHuesped;
-     */
-
     @Autowired
     protected RepositorioHabitacion _RepositorioHabitacion;
 
@@ -32,40 +27,46 @@ public class ServicioImplHuesped extends ServicioBaseImpl<Huesped, Integer> impl
         super(repositorioBase);
     }
 
-    @Transactional
+    @Transactional(rollbackOn = Exception.class)
     @Override
-    public boolean hacerReserva(Huesped huesped, int idHabitacion) {
-
-        // ! falta coreggir
-        // ? no se hace uso de la fk, sino se se ceran nuevas entidades
-
+    public boolean hacerReserva(Huesped huesped, int idHabitacion) throws Exception {
+        // todo : Mejorar la funcionalidad de la reserva
+        // ! hacer que si una habitacion ya esta resrevada, no se pueda reservar de
+        // ! nuevo
         try {
+            // obtenemos el año actual y el anio de nacimiento del huespede
             int anioNacimiento = Integer.parseInt(huesped.getFechaNacimiento().substring(0, 4));
             int anioActual = LocalDate.now().getYear();
-            List<String> numeroCelularHuespedes = _RepositorioHuesped.findAll()
-                    .stream()
-                    .map(Huesped::getNumeroCelular)
-                    .toList();
+            Huesped huespedReserva = null;
 
-            System.out.println("anioActual: " + anioActual + "anioNacimiento: " + anioNacimiento);
+            // Verificamos si el heusped ya existe en la base de datos
+            Optional<Huesped> huespedExistente = _RepositorioHuesped.findByDni(huesped.getDni());
 
+            // verificamos si el huesped es mayor de edad
             if ((anioActual - anioNacimiento) >= 18) {
 
-                if (!numeroCelularHuespedes.contains(huesped.getNumeroCelular())) {
+                if (huespedExistente.isPresent()) {
+                    // si el heusped ya se ecuentra registrado
+                    huespedReserva = huespedExistente.get();
+                }
+
+                // si el huesped no se encuentra registrado
+                if (huespedReserva == null) {
+                    // huespedReserva = huesped;
                     _RepositorioHuesped.save(huesped);
                 } else {
-                    Huesped huespedActual = huesped;
-                    huespedActual.getReservas().get(0);
-                    _RepositorioHuesped.save(huespedActual);
+                    huespedReserva.getReservas().add(huesped.getReservas().get(0));
+                    _RepositorioHuesped.save(huespedReserva);
                 }
 
                 _RepositorioHabitacion.cambiarEstadoHabitacion(idHabitacion);
-
                 return true;
-            } else
-                return false;
+            } else {
+                throw new Exception("!MenorEdad");
+            }
+
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            throw new Exception(e.getMessage());
         }
     }
 }
