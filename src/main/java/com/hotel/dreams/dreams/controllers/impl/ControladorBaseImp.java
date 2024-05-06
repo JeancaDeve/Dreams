@@ -17,7 +17,7 @@ import com.hotel.dreams.dreams.services.impl.ServicioBaseImpl;
 
 import java.util.List;
 
-@PreAuthorize("isAuthenticated()")
+//@PreAuthorize("isAuthenticated()") //!Eliminar esto una vez este el front completo
 public class ControladorBaseImp<E extends EntidadBase, S extends ServicioBaseImpl<E, Integer>>
         implements ControladorBase<E, Integer> {
 
