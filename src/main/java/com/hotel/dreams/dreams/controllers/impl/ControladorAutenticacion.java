@@ -1,9 +1,8 @@
 package com.hotel.dreams.dreams.controllers.impl;
-
+/* 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,7 +16,7 @@ import com.hotel.dreams.dreams.services.impl.ServicioImplUsuario;
 @RestController
 @RequestMapping("auth")
 @CrossOrigin(origins = "*")
-@PreAuthorize("permitAll()")
+//@PreAuthorize("permitAll()")
 public class ControladorAutenticacion {
 
   @Autowired
@@ -33,4 +32,4 @@ public class ControladorAutenticacion {
     }
   }
 
-}
+} */
