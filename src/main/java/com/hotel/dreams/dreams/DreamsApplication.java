@@ -8,9 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 import com.hotel.dreams.dreams.models.Habitacion;
-import com.hotel.dreams.dreams.models.Usuario;
 import com.hotel.dreams.dreams.repositories.RepositorioHabitacion;
-import com.hotel.dreams.dreams.services.impl.ServicioImplUsuario;
 
 @SpringBootApplication
 public class DreamsApplication {
@@ -21,16 +19,8 @@ public class DreamsApplication {
 
 	// todo: una vez terminda el proyecto se puede borrar
 	@Bean
-	CommandLineRunner init(RepositorioHabitacion repHabitacion, ServicioImplUsuario serviceUser) {
+	CommandLineRunner init(RepositorioHabitacion repHabitacion) {
 		return args -> {
-			// agregamos un usuario
-			Usuario usuarioOne = Usuario.builder()
-					.nombreCompleto("Kevin Jeancarlo")
-					.clave("Kevin123")
-					.numeroCelular("916214065")
-					.build();
-
-			// agregamos dos habitaciones
 			Habitacion habitacionOne = Habitacion.builder()
 					.descripcion(
 							"Su estética minimalista, su paleta de colores neutros y su abundante luz natural crean una atmósfera tranquila y relajante, lo que la convierte en un refugio ideal del ajetreo de la vida cotidiana.")
@@ -127,7 +117,6 @@ public class DreamsApplication {
 
 			repHabitacion.saveAll(Set.of(habitacionOne, habitacionTwo, habitacionThree, habitacionFour, habitacionFive,
 					habitacionSix, habitacionSeven, habitacionEight, habitacionNine, habitacionTen));
-			serviceUser.registrarUsuario(usuarioOne);
 
 		};
 	}
