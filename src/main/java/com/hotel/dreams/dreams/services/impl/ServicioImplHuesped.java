@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hotel.dreams.dreams.models.Huesped;
+import com.hotel.dreams.dreams.models.Reserva;
 import com.hotel.dreams.dreams.repositories.RepositorioBase;
 import com.hotel.dreams.dreams.repositories.RepositorioHabitacion;
 import com.hotel.dreams.dreams.repositories.RepositorioHuesped;
@@ -38,6 +39,8 @@ public class ServicioImplHuesped extends ServicioBaseImpl<Huesped, Integer> impl
             int anioActual = LocalDate.now().getYear();
             Huesped huespedReserva = null;
 
+            String fechaActual = LocalDate.now().toString();
+
             // Verificamos si el heusped ya existe en la base de datos
             Optional<Huesped> huespedExistente = _RepositorioHuesped.findByDni(huesped.getDni());
 
@@ -54,7 +57,11 @@ public class ServicioImplHuesped extends ServicioBaseImpl<Huesped, Integer> impl
                     // huespedReserva = huesped;
                     _RepositorioHuesped.save(huesped);
                 } else {
-                    huespedReserva.getReservas().add(huesped.getReservas().get(0));
+                    Reserva reserva = huesped.getReservas().get(0);
+                    reserva.setFechaReserva(fechaActual);
+                    reserva.getFactura().setFecha(fechaActual);
+                    huespedReserva.getReservas().add(reserva);
+
                     _RepositorioHuesped.save(huespedReserva);
                 }
 
