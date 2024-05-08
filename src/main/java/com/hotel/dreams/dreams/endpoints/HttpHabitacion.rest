@@ -1,0 +1,12 @@
+//Datos de usuario -> ejecutar primero para estar autorizado
+
+
+//Obtener todas las habitaciones
+GET http://localhost:8080/api/v1/dreams/habitacion 
+Authorization: Basic 916214065:Kevin123
+
+//Obtener todas las habitaciones
+GET http://localhost:8080/api/v1/dreams/habitacion/disponibles HTTP/1.1
+Authorization: Basic 916214065:Kevin123
+
+
