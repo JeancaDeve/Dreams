@@ -1,6 +1,7 @@
 package com.hotel.dreams.dreams.services.impl;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,6 +13,7 @@ import com.hotel.dreams.dreams.repositories.RepositorioHabitacion;
 import com.hotel.dreams.dreams.repositories.RepositorioHuesped;
 import com.hotel.dreams.dreams.services.ServicioHuesped;
 import java.util.Optional;
+import java.util.Random;
 
 import jakarta.transaction.Transactional;
 
@@ -30,9 +32,7 @@ public class ServicioImplHuesped extends ServicioBaseImpl<Huesped, Integer> impl
     @Transactional(rollbackOn = Exception.class)
     @Override
     public boolean hacerReserva(Huesped huesped, int idHabitacion) throws Exception {
-        // todo : Mejorar la funcionalidad de la reserva
-        // ! hacer que si una habitacion ya esta resrevada, no se pueda reservar de
-        // ! nuevo
+
         try {
             // obtenemos el año actual y el anio de nacimiento del huespede
             int anioNacimiento = Integer.parseInt(huesped.getFechaNacimiento().substring(0, 4));
@@ -40,9 +40,23 @@ public class ServicioImplHuesped extends ServicioBaseImpl<Huesped, Integer> impl
             Huesped huespedReserva = null;
 
             String fechaActual = LocalDate.now().toString();
+            String horaActual = LocalTime.now().toString();
 
             // Verificamos si el heusped ya existe en la base de datos
             Optional<Huesped> huespedExistente = _RepositorioHuesped.findByDni(huesped.getDni());
+
+            // proceso para activar un ruc aleatorio
+
+            Random random = new Random();
+            int primerGrupo = random.nextInt(8000) + 1000;
+            int segundoGrupo = random.nextInt(8000) + 1000;
+            String ruc = primerGrupo + "3" + segundoGrupo + "53";
+
+            // etsblecemos la fecha actual a la fecha reserva y la fecha de factura
+            Reserva nuevaReserva = huesped.getReservas().get(0);
+            nuevaReserva.setFechaReserva(fechaActual + " " + horaActual);
+            nuevaReserva.getFactura().setFecha(fechaActual + " " + horaActual);
+            nuevaReserva.getFactura().setRuc(ruc);
 
             // verificamos si el huesped es mayor de edad
             if ((anioActual - anioNacimiento) >= 18) {
@@ -55,13 +69,11 @@ public class ServicioImplHuesped extends ServicioBaseImpl<Huesped, Integer> impl
                 // si el huesped no se encuentra registrado
                 if (huespedReserva == null) {
                     // huespedReserva = huesped;
+
                     _RepositorioHuesped.save(huesped);
                 } else {
-                    Reserva reserva = huesped.getReservas().get(0);
-                    reserva.setFechaReserva(fechaActual);
-                    reserva.getFactura().setFecha(fechaActual);
-                    huespedReserva.getReservas().add(reserva);
 
+                    huespedReserva.getReservas().add(huesped.getReservas().get(0));
                     _RepositorioHuesped.save(huespedReserva);
                 }
 
@@ -75,4 +87,5 @@ public class ServicioImplHuesped extends ServicioBaseImpl<Huesped, Integer> impl
             throw new Exception(e.getMessage());
         }
     }
+
 }
