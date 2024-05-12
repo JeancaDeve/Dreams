@@ -31,7 +31,11 @@ public class ServicioImplHuesped extends ServicioBaseImpl<Huesped, Integer> impl
 
     @Transactional(rollbackOn = Exception.class)
     @Override
-    public boolean hacerReserva(Huesped huesped, int idHabitacion) throws Exception {
+
+    public String hacerReserva(Huesped huesped, int idHabitacion) throws Exception {
+        // todo : Mejorar la funcionalidad de la reserva
+        // ! hacer que si una habitacion ya esta resrevada, no se pueda reservar de
+        // ! nuevo
 
         try {
             // obtenemos el año actual y el anio de nacimiento del huespede
@@ -78,13 +82,13 @@ public class ServicioImplHuesped extends ServicioBaseImpl<Huesped, Integer> impl
                 }
 
                 _RepositorioHabitacion.cambiarEstadoHabitacion(idHabitacion);
-                return true;
+                return "reservado";
             } else {
-                throw new Exception("!MenorEdad");
+                return "menorEdad";
             }
 
         } catch (Exception e) {
-            throw new Exception(e.getMessage());
+            throw new Exception("error");
         }
     }
 
