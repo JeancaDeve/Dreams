@@ -1,4 +1,4 @@
-package com.hotel.dreams.dreams.services.impl;
+package com.hotel.dreams.dreams.services.implementation;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -11,7 +11,8 @@ import com.hotel.dreams.dreams.models.Reserva;
 import com.hotel.dreams.dreams.repositories.RepositorioBase;
 import com.hotel.dreams.dreams.repositories.RepositorioHabitacion;
 import com.hotel.dreams.dreams.repositories.RepositorioHuesped;
-import com.hotel.dreams.dreams.services.ServicioHuesped;
+import com.hotel.dreams.dreams.services.business.ServicioHuesped;
+
 import java.util.Optional;
 import java.util.Random;
 

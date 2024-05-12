@@ -1,4 +1,4 @@
-package com.hotel.dreams.dreams.services;
+package com.hotel.dreams.dreams.services.business;
 
 import java.util.List;
 

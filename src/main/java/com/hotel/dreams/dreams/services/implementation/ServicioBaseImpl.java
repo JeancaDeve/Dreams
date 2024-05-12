@@ -1,11 +1,11 @@
-package com.hotel.dreams.dreams.services.impl;
+package com.hotel.dreams.dreams.services.implementation;
 
 import java.util.List;
 import java.util.Optional;
 
 import com.hotel.dreams.dreams.models.EntidadBase;
 import com.hotel.dreams.dreams.repositories.RepositorioBase;
-import com.hotel.dreams.dreams.services.ServicioBase;
+import com.hotel.dreams.dreams.services.business.ServicioBase;
 
 import jakarta.transaction.Transactional;
 

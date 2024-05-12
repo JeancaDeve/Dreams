@@ -1,4 +1,4 @@
-package com.hotel.dreams.dreams.services.impl;
+package com.hotel.dreams.dreams.services.implementation;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import com.hotel.dreams.dreams.models.Habitacion;
 import com.hotel.dreams.dreams.repositories.RepositorioBase;
 import com.hotel.dreams.dreams.repositories.RepositorioHabitacion;
-import com.hotel.dreams.dreams.services.ServicioHabitacion;
+import com.hotel.dreams.dreams.services.business.ServicioHabitacion;
 
 import jakarta.transaction.Transactional;
 

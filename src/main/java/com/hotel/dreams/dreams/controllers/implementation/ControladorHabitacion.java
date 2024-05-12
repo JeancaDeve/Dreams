@@ -1,9 +1,9 @@
-package com.hotel.dreams.dreams.controllers.impl;
+package com.hotel.dreams.dreams.controllers.implementation;
 
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hotel.dreams.dreams.models.Habitacion;
-import com.hotel.dreams.dreams.services.impl.ServicioImplHabitacion;
+import com.hotel.dreams.dreams.services.implementation.ServicioImplHabitacion;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

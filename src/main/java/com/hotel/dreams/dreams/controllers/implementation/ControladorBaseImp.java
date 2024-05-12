@@ -1,4 +1,4 @@
-package com.hotel.dreams.dreams.controllers.impl;
+package com.hotel.dreams.dreams.controllers.implementation;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import com.hotel.dreams.dreams.controllers.ControladorBase;
+import com.hotel.dreams.dreams.controllers.business.ControladorBase;
 import com.hotel.dreams.dreams.models.EntidadBase;
-import com.hotel.dreams.dreams.services.impl.ServicioBaseImpl;
+import com.hotel.dreams.dreams.services.implementation.ServicioBaseImpl;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.hotel.dreams.dreams.controllers.impl;
+package com.hotel.dreams.dreams.controllers.implementation;
 /* 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
