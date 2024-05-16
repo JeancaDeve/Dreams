@@ -1,11 +1,12 @@
 package com.hotel.dreams.dreams.services.implementation;
 
 import java.time.LocalDate;
-import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.hotel.dreams.dreams.models.Habitacion;
 import com.hotel.dreams.dreams.models.Huesped;
 import com.hotel.dreams.dreams.models.Reserva;
 import com.hotel.dreams.dreams.repositories.RepositorioBase;
@@ -15,7 +16,6 @@ import com.hotel.dreams.dreams.services.business.ServicioHuesped;
 
 import java.util.Optional;
 import java.util.Random;
-
 import jakarta.transaction.Transactional;
 
 @Service
@@ -30,67 +30,126 @@ public class ServicioImplHuesped extends ServicioBaseImpl<Huesped, Integer> impl
         super(repositorioBase);
     }
 
-    @Transactional(rollbackOn = Exception.class)
+    @Transactional
     @Override
+    public void hacerReserva(Huesped huesped) throws Exception {
 
-    public String hacerReserva(Huesped huesped, int idHabitacion) throws Exception {
-        // todo : Mejorar la funcionalidad de la reserva
-        // ! hacer que si una habitacion ya esta resrevada, no se pueda reservar de
-        // ! nuevo
+        uniqueCelularAndDni(huesped);
 
-        try {
-            // obtenemos el año actual y el anio de nacimiento del huespede
-            int anioNacimiento = Integer.parseInt(huesped.getFechaNacimiento().substring(0, 4));
-            int anioActual = LocalDate.now().getYear();
-            Huesped huespedReserva = null;
+        mayorEdad(huesped.getFechaNacimiento());
 
-            String fechaActual = LocalDate.now().toString();
-            String horaActual = LocalTime.now().toString();
+        Reserva nuevaReserva = huesped.getReservas().get(0);
 
-            // Verificamos si el heusped ya existe en la base de datos
-            Optional<Huesped> huespedExistente = _RepositorioHuesped.findByDni(huesped.getDni());
+        validadFechas(nuevaReserva);
 
-            // proceso para activar un ruc aleatorio
+        Huesped huespedReserva = huespedExistente(huesped) ? _RepositorioHuesped.findByAll(huesped).get() : huesped;
 
-            Random random = new Random();
-            int primerGrupo = random.nextInt(8000) + 1000;
-            int segundoGrupo = random.nextInt(8000) + 1000;
-            String ruc = primerGrupo + "3" + segundoGrupo + "53";
+        Habitacion habitacionReserva = _RepositorioHabitacion.findById(nuevaReserva.getHabitacion().getCodigo())
+                .orElseThrow(() -> new Exception("No se encontro la habitacion"));
 
-            // etsblecemos la fecha actual a la fecha reserva y la fecha de factura
-            Reserva nuevaReserva = huesped.getReservas().get(0);
-            nuevaReserva.setFechaReserva(fechaActual + " " + horaActual);
-            nuevaReserva.getFactura().setFecha(fechaActual + " " + horaActual);
-            nuevaReserva.getFactura().setRuc(ruc);
+        habitacionReservaDisponible(habitacionReserva);
 
-            // verificamos si el huesped es mayor de edad
-            if ((anioActual - anioNacimiento) >= 18) {
+        double precioDiaHbaitacion = habitacionReserva.getPrecioDia();
+        double montoFactura = precioDiaHbaitacion * diasHospedaje(nuevaReserva);
 
-                if (huespedExistente.isPresent()) {
-                    // si el heusped ya se ecuentra registrado
-                    huespedReserva = huespedExistente.get();
-                }
+        nuevaReserva.getFactura().setMonto(montoFactura);
+        nuevaReserva.getFactura().setRuc(rucGenerado());
 
-                // si el huesped no se encuentra registrado
-                if (huespedReserva == null) {
-                    // huespedReserva = huesped;
+        // agregamos la nueva reserva a la lista de reservas en caso el huesped ya haya
+        // existido
+        if (huespedReserva != huesped)
+            huespedReserva.getReservas().add(nuevaReserva);
 
-                    _RepositorioHuesped.save(huesped);
-                } else {
+        _RepositorioHuesped.save(huespedReserva);
 
-                    huespedReserva.getReservas().add(huesped.getReservas().get(0));
-                    _RepositorioHuesped.save(huespedReserva);
-                }
+        _RepositorioHabitacion.cambiarEstadoHabitacion(huesped.getReservas().get(0).getHabitacion().getCodigo());
 
-                _RepositorioHabitacion.cambiarEstadoHabitacion(idHabitacion);
-                return "reservado";
-            } else {
-                return "menorEdad";
-            }
+    }
 
-        } catch (Exception e) {
-            throw new Exception("error");
+    public void mayorEdad(String fechaNacimiento) throws Exception {
+
+        LocalDate fechaActual = LocalDate.now();
+
+        LocalDate fechaDeNacimiento = LocalDate.parse(fechaNacimiento);
+
+        // Aqui encontramos la diferencia entre la fecha de nacimiento y la fecha actual
+        long edadHuesped = ChronoUnit.YEARS.between(fechaDeNacimiento, fechaActual);
+
+        if (edadHuesped < 18)
+            throw new Exception("El huesped es menor de edad");
+    }
+
+    public void uniqueCelularAndDni(Huesped huesped) throws Exception {
+
+        Optional<Huesped> cel = _RepositorioHuesped.findByNumeroCelular(huesped.getNumeroCelular());
+
+        Optional<Huesped> dni = _RepositorioHuesped.findByDni(huesped.getDni());
+
+        if (!huespedExistente(huesped)) {
+            if (cel.isPresent())
+                throw new Exception("El numero celular le pertence a otro huesped");
+            if (dni.isPresent())
+                throw new Exception("El dni le pertence a otro huesped");
         }
+    }
+
+    // todo: mejorar metodo, podemos usar algun api u otro sistema
+    public String rucGenerado() {
+
+        Random random = new Random();
+        int primerGrupo = random.nextInt(8000) + 1000;
+        int segundoGrupo = random.nextInt(8000) + 1000;
+        return primerGrupo + "3" + segundoGrupo + "53";
+
+    }
+
+    public boolean huespedExistente(Huesped huesped) {
+
+        Optional<Huesped> huespedExistente = _RepositorioHuesped.findByAll(huesped);
+
+        return huespedExistente.isPresent();
+    }
+
+    public void validadFechas(Reserva reserva) throws Exception {
+
+        LocalDate entrada = LocalDate.parse(reserva.getFechaEntrada());
+        LocalDate salida = LocalDate.parse(reserva.getFechaSalida());
+        LocalDate fechaActual = LocalDate.now();
+
+        if (entrada.isBefore(fechaActual))
+            throw new Exception("La fecha de entrada no puede ser antes de " + fechaActual);
+        else if (salida.isBefore(fechaActual))
+            throw new Exception("La fecha de salida no puede ser antes de " + fechaActual);
+        else if (entrada.isAfter(salida))
+            throw new Exception("La fecha de entrada no puede ser despues de " + salida);
+        else if (salida.isBefore(entrada))
+            throw new Exception("La fecha de salida no puede ser antes de " + entrada);
+    }
+
+    public long diasHospedaje(Reserva reserva) throws Exception {
+        LocalDate entrada = LocalDate.parse(reserva.getFechaEntrada());
+        LocalDate salida = LocalDate.parse(reserva.getFechaSalida());
+
+        // retornamos la cantidad de dias que pasan entre 2 fechas
+        return ChronoUnit.DAYS.between(entrada, salida);
+
+    }
+
+    @Override
+    public Huesped buscarPorDni(String numeroDni) throws Exception {
+
+        return _RepositorioHuesped.findByDni(numeroDni)
+                .orElseThrow(() -> new Exception("No se encontro el huesped con el DNI: " + numeroDni));
+
+    }
+
+    public void habitacionReservaDisponible(Habitacion habitacion) throws Exception {
+
+        boolean disponible = _RepositorioHabitacion.getHabitacionesDisponibles().contains(habitacion);
+
+        if (!disponible)
+            throw new Exception("La habitacion no se encuentra disponible");
+
     }
 
 }
