@@ -1,5 +1,7 @@
 package com.hotel.dreams.dreams.models;
 
+import org.hibernate.annotations.CurrentTimestamp;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import lombok.AllArgsConstructor;
@@ -21,6 +23,7 @@ public class Factura extends EntidadBase {
     @Column(columnDefinition = "float")
     private double monto;
     @Column(columnDefinition = "datetime")
+    @CurrentTimestamp
     private String fecha;
 
 }
