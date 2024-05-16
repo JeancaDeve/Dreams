@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,10 +21,21 @@ public class ControladorHuesped extends ControladorBaseImp<Huesped, ServicioImpl
     @Autowired
     protected ServicioImplHuesped servicioHuesped;
 
-    @PostMapping("/reservar/{idHabitacion}")
-    public ResponseEntity<?> hacerReserva(@RequestBody Huesped huesped, @PathVariable int idHabitacion) {
+    @PostMapping("/reservar")
+    public ResponseEntity<?> hacerReserva(@RequestBody Huesped huesped) {
         try {
-            return ResponseEntity.status(HttpStatus.OK).body(servicioHuesped.hacerReserva(huesped, idHabitacion));
+            servicioHuesped.hacerReserva(huesped);
+            return ResponseEntity.status(HttpStatus.OK).body("Reserva realizada con exito");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/dni/{dni}")
+    public ResponseEntity<?> obtnerHuespedDni(@PathVariable String dni) {
+        try {
+            Huesped huesped = servicioHuesped.buscarPorDni(dni);
+            return ResponseEntity.status(HttpStatus.OK).body(huesped);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
