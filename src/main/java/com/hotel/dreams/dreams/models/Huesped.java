@@ -41,7 +41,7 @@ public class Huesped extends EntidadBase {
     @Column(columnDefinition = "char(8)", unique = true)
     private String dni; // un dni tiene 8 digitos (77493128)
 
-    @Column(columnDefinition = "datetime", name = "fecha_nacimiento")
+    @Column(columnDefinition = "date", name = "fecha_nacimiento")
     private String fechaNacimiento;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)

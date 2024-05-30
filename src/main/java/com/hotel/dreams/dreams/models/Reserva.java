@@ -13,7 +13,6 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-
 @Entity
 @Data
 @AllArgsConstructor
@@ -21,10 +20,10 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(callSuper = true)
 @Builder
 public class Reserva extends EntidadBase {
-    @Column(name = "fecha_entrada", columnDefinition = "datetime")
+    @Column(name = "fecha_entrada", columnDefinition = "date")
     private String fechaEntrada;
 
-    @Column(name = "fecha_salida", columnDefinition = "datetime")
+    @Column(name = "fecha_salida", columnDefinition = "date")
     private String fechaSalida;
 
     @Column(columnDefinition = "char(1)")
