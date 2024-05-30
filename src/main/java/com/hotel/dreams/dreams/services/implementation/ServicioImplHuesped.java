@@ -118,10 +118,6 @@ public class ServicioImplHuesped extends ServicioBaseImpl<Huesped, Integer> impl
 
         if (entrada.isBefore(fechaActual))
             throw new Exception("La fecha de entrada no puede ser antes de " + fechaActual);
-        else if (salida.isBefore(fechaActual))
-            throw new Exception("La fecha de salida no puede ser antes de " + fechaActual);
-        else if (entrada.isAfter(salida))
-            throw new Exception("La fecha de entrada no puede ser despues de " + salida);
         else if (salida.isBefore(entrada))
             throw new Exception("La fecha de salida no puede ser antes de " + entrada);
     }
